@@ -1,7 +1,6 @@
 // Main JavaScript functionality for Nibras Jordan Website
 
 // Global variables
-let currentLanguage = 'en';
 let isVideoPlaying = true;
 let isVideoMuted = true;
 
@@ -217,27 +216,9 @@ function renderNewsGrid(newsItems) {
     `).join('');
     
     // Update language for new content if function exists
-    if (window.updateLanguage && typeof window.updateLanguage === 'function') {
+    if (typeof updateLanguage === 'function') {
         updateLanguage();
     }
-}
-
-// Format date
-function formatDate(dateString) {
-    // Use the formatDate function from language.js if available
-    if (window.formatDate && typeof window.formatDate === 'function') {
-        return window.formatDate(dateString);
-    }
-    
-    // Fallback formatting
-    const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    const currentLang = getCurrentLanguage ? getCurrentLanguage() : 'en';
-    
-    if (currentLang === 'ar') {
-        return date.toLocaleDateString('ar-JO', options);
-    }
-    return date.toLocaleDateString('en-US', options);
 }
 
 // Toggle search modal
@@ -301,7 +282,7 @@ function handleSearch(event) {
     }
     
     // Update language for search results if function exists
-    if (window.updateLanguage && typeof window.updateLanguage === 'function') {
+    if (typeof updateLanguage === 'function') {
         updateLanguage();
     }
 }
