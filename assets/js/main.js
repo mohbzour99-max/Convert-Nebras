@@ -15,9 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize website functionality
 function initializeWebsite() {
-    // Set initial language
-    updateLanguage();
-    
     // Initialize video controls
     initializeVideoControls();
     
@@ -219,16 +216,25 @@ function renderNewsGrid(newsItems) {
         </div>
     `).join('');
     
-    // Update language for new content
-    updateLanguage();
+    // Update language for new content if function exists
+    if (window.updateLanguage && typeof window.updateLanguage === 'function') {
+        updateLanguage();
+    }
 }
 
 // Format date
 function formatDate(dateString) {
+    // Use the formatDate function from language.js if available
+    if (window.formatDate && typeof window.formatDate === 'function') {
+        return window.formatDate(dateString);
+    }
+    
+    // Fallback formatting
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const currentLang = getCurrentLanguage ? getCurrentLanguage() : 'en';
     
-    if (currentLanguage === 'ar') {
+    if (currentLang === 'ar') {
         return date.toLocaleDateString('ar-JO', options);
     }
     return date.toLocaleDateString('en-US', options);
@@ -294,8 +300,10 @@ function handleSearch(event) {
         `;
     }
     
-    // Update language for search results
-    updateLanguage();
+    // Update language for search results if function exists
+    if (window.updateLanguage && typeof window.updateLanguage === 'function') {
+        updateLanguage();
+    }
 }
 
 // Utility function to show loading state
