@@ -204,3 +204,14 @@ window.getCurrentDirection = getCurrentDirection;
 window.isRTL = isRTL;
 window.formatNumber = formatNumber;
 window.formatDate = formatDate;
+
+// Update language function for re-applying current language settings
+function updateLanguage() {
+    updateTranslatableElements();
+    updateLanguageButtons();
+    updateFormPlaceholders();
+    updateLanguageContent();
+}
+
+// Make updateLanguage globally accessible
+window.updateLanguage = updateLanguage;
